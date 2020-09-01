@@ -1,18 +1,18 @@
 <template>
   <v-app>
-    <Login>
-
-    </Login>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import Login from "./components/auth/Login"
+//import Login from "./components/auth/Login"
+import Register from "./components/auth/Register"
 export default {
   name: 'App',
 
   components: {
-    Login
+    // eslint-disable-next-line vue/no-unused-components
+    Register
   }
 }
 </script>
