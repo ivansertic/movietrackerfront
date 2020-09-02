@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-cookie": "^1.1.4",
+    "vue-navigation-bar": "^4.0.2",
     "vue-router": "^3.4.3",
     "vue-simple-alert": "^1.1.1",
     "vuetify": "^2.3.10"

@@ -7,7 +7,8 @@ import Login from "./components/auth/Login"
 import Register from "./components/auth/Register";
 import VueCookie from 'vue-cookie'
 import VueSimpleAlert from "vue-simple-alert";
-
+import MoviesToWatch from "@/components/movies/MoviesToWatch";
+import AddMovie from "@/components/movies/AddMovie";
 Vue.use(VueSimpleAlert);
 
 Vue.use(VueRouter);
@@ -24,6 +25,16 @@ const routes = [
     path: "/register",
     component: Register,
     name: "register"
+  },
+  {
+    path:"/movie",
+    component: MoviesToWatch,
+    name:"moviesToWatch"
+  },
+  {
+    path:"/movie/add",
+    component: AddMovie,
+    name:"addMovie"
   }
 ];
 
