@@ -63,23 +63,11 @@ name: "login",
         password:this.password
       }).then(res=>{
         this.$cookie.set('accessToken',res.data.accessToken);
-        console.log(this.$cookie.get("accessToken"))
+        this.$router.push("/movie")
       }).catch((error)=>{
           this.$alert(error.response.data._message)
         })
-    },
-
-    /*test(){
-      axios.get(test,{'headers': { 'Authorization': 'Bearer '+this.$cookie.get('accessToken') }
-      }).catch((error)=>{console.log(error.response.status)
-        if(error.response.status !== 200){
-          this.$alert("You are not logged in")
-        }})
-    },
-
-    logout(){
-      this.$cookie.set("accessToken","")
-    }*/
+    }
   }
 
 }

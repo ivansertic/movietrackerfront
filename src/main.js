@@ -9,6 +9,7 @@ import VueCookie from 'vue-cookie'
 import VueSimpleAlert from "vue-simple-alert";
 import MoviesToWatch from "@/components/movies/MoviesToWatch";
 import AddMovie from "@/components/movies/AddMovie";
+import EditMovie from "@/components/movies/EditMovie";
 Vue.use(VueSimpleAlert);
 
 Vue.use(VueRouter);
@@ -16,6 +17,11 @@ Vue.use(VueCookie);
 
 
 const routes = [
+  {
+    path:"/movie/:id",
+    component: EditMovie,
+    name:"editMovie"
+  },
   {
     path: "/",
     component: Login,
@@ -32,7 +38,7 @@ const routes = [
     name:"moviesToWatch"
   },
   {
-    path:"/movie/add",
+    path:"/movie/new/add",
     component: AddMovie,
     name:"addMovie"
   }

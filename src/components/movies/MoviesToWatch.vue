@@ -4,7 +4,7 @@
       <v-toolbar-title>Watched movies</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-flex md3>
-        <v-btn to="/movie/add" dark color="blue">Add Movie</v-btn>
+        <v-btn to="/movie/new/add" dark color="blue">Add Movie</v-btn>
       </v-flex>
       <v-spacer></v-spacer>
 
@@ -16,20 +16,85 @@
         <v-btn dark color="blue">Movies To Watch</v-btn>
       </v-flex>
       <v-flex sm1>
-        <v-btn dark color="blue">LogOut</v-btn>
+        <v-btn @click.prevent="logout" dark color="blue">LogOut</v-btn>
       </v-flex>
     </v-toolbar>
-    {{this.userInfo}}
+    <v-spacer></v-spacer>
+
+    <div>
+      <v-simple-table
+          :dense="false"
+          :fixed-header="false">
+        <thead>
+        <th class="text-center" >Picture</th>
+        <th class="text-center">Details</th>
+        <th class="text-center">Actors</th>
+        <th class="text-center">Actions</th>
+        </thead>
+
+        <tbody>
+          <tr v-for="(movie,index) in movies" :key="index">
+            <td class="text-center" width="200" height="200">
+              <v-img
+                  :src="require(`../../../../movieTracker/public/${movie.media.path}`)"
+                  width="200"
+                  height="300"
+              >
+              </v-img>
+            </td>
+            <td class="text-center">
+              <br>
+              <b>Title:</b><br>
+              {{movie.title}}
+              <br><br>
+              <b>Description:</b>
+              <br>
+              {{movie.description}}
+              <br><br>
+              <b>Genre:</b><br>
+              {{movie.genre}}
+              <br><br>
+              <b>Duration:</b><br>
+              {{movie.duration}} min
+            </td>
+            <td class="text-center">
+              <div v-for="(movie,index) in movies.actors" :key="index">
+              <br>
+              <b>FullName:</b> {{actor.firstName}}  {{actor.lasName}}
+              <br>
+                <b>Age:</b> {{actor.age}}
+              </div>
+            </td>
+            <td class="text-center">
+              <div>
+              <v-btn dark color="blue">Add Actor</v-btn>
+              </div>
+              <br>
+              <div>
+              <v-btn @click="$router.push(`/movie/${movie.id}`)" dark color="blue">Edit movie</v-btn>
+              </div>
+              <br>
+              <div>
+              <v-btn @click.prevent="deleteMovie(movie.id)" dark color="red">Delete</v-btn>
+              </div>
+            </td>
+          </tr>
+        <br>
+        </tbody>
+      </v-simple-table>
+    </div>
   </v-navigation-drawer>
 </template>
 
 <script>
 import axios from 'axios';
-const apiUrl = "http://localhost:3333/api/user";
+const apiUrl = "http://localhost:3333/api/movie/finished";
+const deleteUrl="http://localhost:3333/api/movie/"
 export default {
 name: "MoviesToWatch",
   data: ()=>({
-    userInfo:""
+    movies:"",
+    imageBaseUrl:"../../../../movieTracker/public/"
   }),
 
   watch: {
@@ -42,8 +107,19 @@ name: "MoviesToWatch",
   methods:{
     async fetchData(){
       axios.get(apiUrl,{'headers': { 'Authorization': 'Bearer '+this.$cookie.get('accessToken')}}).then(response=>{
-        this.userInfo = response.data
+        this.movies = response.data.data
       })
+    },
+    deleteMovie(id){
+      axios.delete(deleteUrl+id,{'headers': { 'Authorization': 'Bearer '+this.$cookie.get('accessToken')}})
+          .then(response =>{
+            if(response.status === 200){
+              location.reload()
+            }})
+    },
+    logout(){
+      this.$cookie.set("accessToken","")
+      this.$router.push("/")
     }
   }
 }

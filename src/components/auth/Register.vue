@@ -88,7 +88,11 @@ export default {
         email: this.email,
         password: this.password,
         password_confirmation: this.confirm
-      }).then((response) =>{console.log(response.status)}
+      }).then((response) =>{
+            if(response.status ===200){
+              this.$router.push("/")
+            }
+          }
           ,(error) => {
         console.log(error.response.status)})
     }

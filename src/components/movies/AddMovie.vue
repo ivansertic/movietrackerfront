@@ -86,10 +86,17 @@ name: "AddMovie",
       formData.append("description", this.description)
       formData.append("duration", this.duration)
       formData.append("cover_picture", this.file)
+      formData.append("finished","false")
       axios.post(apiEndPoint,
         formData
       ,{'headers': { 'Authorization': 'Bearer '+this.$cookie.get('accessToken')}}
-      )
+      ).then(response =>{
+        if(response.status ===200){
+          this.$router.push("/movie")
+        }
+      }).catch(error=>{
+        this.$alert(error.response.data._message)
+      })
     }
   }
 
