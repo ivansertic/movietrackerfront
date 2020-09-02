@@ -10,6 +10,9 @@ import VueSimpleAlert from "vue-simple-alert";
 import MoviesToWatch from "@/components/movies/MoviesToWatch";
 import AddMovie from "@/components/movies/AddMovie";
 import EditMovie from "@/components/movies/EditMovie";
+import AddActor from "@/components/actors/AddActor";
+import EditActor from "@/components/actors/EditActor";
+import WatchedMovies from "@/components/movies/WatchedMovies";
 Vue.use(VueSimpleAlert);
 
 Vue.use(VueRouter);
@@ -17,6 +20,21 @@ Vue.use(VueCookie);
 
 
 const routes = [
+  {
+    path:"/moviesToWatch",
+    component: WatchedMovies,
+    name:"moviesToWatch"
+  },
+  {
+    path:"/actor/edit/:id",
+    component: EditActor,
+    name:"editActor"
+  },
+  {
+    path:"/actor/create/:id",
+    component: AddActor,
+    name:"addActor"
+  },
   {
     path:"/movie/:id",
     component: EditMovie,

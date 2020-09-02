@@ -10,10 +10,10 @@
 
 
       <v-flex sm2>
-        <v-btn disabled dark>Watched movies</v-btn>
+        <v-btn to="/movie" dark color="blue">Watched movies</v-btn>
       </v-flex >
       <v-flex sm2>
-        <v-btn to="/moviesToWatch" dark color="blue">Movies To Watch</v-btn>
+        <v-btn disabled dark >Movies To Watch</v-btn>
       </v-flex>
       <v-flex sm1>
         <v-btn @click.prevent="logout" dark color="blue">LogOut</v-btn>
@@ -33,60 +33,60 @@
         </thead>
 
         <tbody>
-          <tr v-for="(movie,index) in movies" :key="index">
+        <tr v-for="(movie,index) in movies" :key="index">
 
-            <td class="text-center" width="200" height="200">
-              <v-img
-                  :src="require(`../../../../movieTracker/public/${movie.media.path}`)"
-                  width="200"
-                  height="300"
-              >
-              </v-img>
-            </td>
+          <td class="text-center" width="200" height="200">
+            <v-img
+                :src="require(`../../../../movieTracker/public/${movie.media.path}`)"
+                width="200"
+                height="300"
+            >
+            </v-img>
+          </td>
 
-            <td class="text-center">
-              <br>
-              <b>Title:</b><br>
-              {{movie.title}}
-              <br><br>
-              <b>Description:</b>
-              <br>
-              {{movie.description}}
-              <br><br>
-              <b>Genre:</b><br>
-              {{movie.genre}}
-              <br><br>
-              <b>Duration:</b><br>
-              {{movie.duration}} min
-            </td>
+          <td class="text-center">
+            <br>
+            <b>Title:</b><br>
+            {{movie.title}}
+            <br><br>
+            <b>Description:</b>
+            <br>
+            {{movie.description}}
+            <br><br>
+            <b>Genre:</b><br>
+            {{movie.genre}}
+            <br><br>
+            <b>Duration:</b><br>
+            {{movie.duration}} min
+          </td>
 
-            <td class="text-center">
-              <div v-for="(actor,index) in movies[index].actors" :key="index">
+          <td class="text-center">
+            <div v-for="(actor,index) in movies[index].actors" :key="index">
               <br>
               <b>Full Name:</b> {{actor.firstName}} {{actor.lastName}}
               <br>
-                <b>Age:</b> {{actor.age}}
-                <br>
-                <v-btn @click.prevent="$router.push(`/actor/edit/${actor.id}`)" dark color="blue">Edit</v-btn>
-                <v-btn @click.prevent="deleteActor(actor.id)" dark color="red">Delete</v-btn>
-              </div>
+              <b>Age:</b> {{actor.age}}
+              <br>
+              <v-btn @click.prevent="$router.push(`/actor/edit/${actor.id}`)" dark color="blue">Edit</v-btn>
+              <v-btn @click.prevent="deleteActor(actor.id)" dark color="red">Delete</v-btn>
+            </div>
 
-            </td>
+          </td>
 
-            <td class="text-center">
-              <div>
+          <td class="text-center">
+            <div>
               <v-btn @click.prevent="$router.push(`/actor/create/${movie.id}`)" dark color="blue">Add Actor</v-btn>
-              </div>
-              <br>
-              <div>
+            </div>
+            <br>
+            <div>
               <v-btn @click="$router.push(`/movie/${movie.id}`)" dark color="blue">Edit movie</v-btn>
-              </div>
-              <br>
-              <div>
+            </div>
+            <br>
+            <div>
               <v-btn @click.prevent="deleteMovie(movie.id)" dark color="red">Delete</v-btn>
-              </div>
-            </td>
-          </tr>
+            </div>
+          </td>
+        </tr>
         <br>
         </tbody>
       </v-simple-table>
@@ -96,11 +96,11 @@
 
 <script>
 import axios from 'axios';
-const apiUrl = "http://localhost:3333/api/movie/finished";
+const apiUrl = "http://localhost:3333/api/movie/watch";
 const deleteUrl="http://localhost:3333/api/movie/"
 const deleteActor = "http://localhost:3333/api/actor/"
 export default {
-name: "MoviesToWatch",
+  name: "WatchedMovies",
   data: ()=>({
     movies:"",
     imageBaseUrl:"../../../../movieTracker/public/"

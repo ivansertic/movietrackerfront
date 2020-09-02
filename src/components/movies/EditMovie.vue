@@ -6,7 +6,7 @@
             <v-card class="elevation-12">
               <v-toolbar dark color="blue">
                 <v-toolbar-title>
-                  Add Movie
+                  Edit Movie
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text>
